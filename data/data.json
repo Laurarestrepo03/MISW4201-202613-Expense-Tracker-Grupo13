@@ -1,0 +1,79 @@
+{
+    "balance": 52979.81000000001,
+    "data": [
+        {"incomes": [
+            {
+                "amount": 1050,
+                "source": "Google Inc."
+            },
+            {
+                "amount": 20000,
+                "source": "ubc"
+            },
+            {
+                "amount": 100000,
+                "source": "Income"
+            },
+            {
+                "amount": 1200.89,
+                "source": "trial"
+            },
+            {
+                "amount": 2534.1,
+                "source": "ICBC"
+            }
+        ]},
+        {"expenses": [
+            {
+                "date": "20 Oct, 2022",
+                "note": "Phone Bill",
+                "amount": 100,
+                "title": "Bell Mobile"
+            },
+            {
+                "date": "23 Nov, 2022",
+                "note": "Down Payment",
+                "amount": 55000,
+                "title": "Property"
+            },
+            {
+                "date": "18 Nov, 2022",
+                "note": "New clothes",
+                "amount": 130.23,
+                "title": "Uniqlo"
+            },
+            {
+                "date": "30 Nov, 2022",
+                "note": "Charging Cable",
+                "amount": 24.5,
+                "title": "BestBuy"
+            },
+            {
+                "date": "1 Dec, 2022",
+                "note": "Admission fee",
+                "amount": 50.45,
+                "title": "Museum"
+            }
+        ]},
+        {"goals": [
+            {
+                "goalAmount": 50000,
+                "name": "House",
+                "currentAmount": 15000,
+                "complete": false
+            },
+            {
+                "goalAmount": 3000,
+                "name": "Car parts",
+                "currentAmount": 1050,
+                "complete": false
+            },
+            {
+                "goalAmount": 800,
+                "name": "TV",
+                "currentAmount": 450,
+                "complete": false
+            }
+        ]}
+    ]
+}
