@@ -19,6 +19,8 @@ A continuación encontrará el paso a paso para ejecutar la aplicación, y el li
 3. Dar click en el botón de ejución localizado en la esquina superior derecha.
 4. Listo, podrá utilizar la aplicación en la ventana emergente.
 
+<img height="400" alt="Captura de pantalla 2026-06-15 234120" src="https://github.com/user-attachments/assets/88df0532-53aa-4717-9f1a-09cf6c350f4b" />
+
 ### Funcionalidades
 **Dashboard**
 - Balance total calculado a partir de los ingresos, gastos y contribuciones a las metas de ahorro. 
