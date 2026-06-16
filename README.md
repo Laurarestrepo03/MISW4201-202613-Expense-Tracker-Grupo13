@@ -52,7 +52,7 @@ A continuación encontrará el paso a paso para ejecutar la aplicación, y el li
 ## Aplicación modernizada
 🔜
 
-
+<!--
 ## Manage money responsibly
 
 ### Abstract
@@ -102,3 +102,4 @@ to make budgeting easier.
 - You can save the state of my application by clicking on "Save" in File menu.
   Your data is also synced after every creation of an object.
 - You can reload the state of my application by clicking on "Load" in File menu.
+-->
