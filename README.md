@@ -1,5 +1,56 @@
 # Expense Tracker
 
+## Tabla de contenido
+1. [Apliación origen](#aplicación-origen)
+2. [Aplicación modernizada](#aplicación-modernizada)
+
+## Aplicación origen
+A continuación encontrará el paso a paso para ejecutar la aplicación, y el listado de funcionalidades.
+
+### Ejecución de la aplicación
+**Instalaciones previas**
+1. [Visual Studio Code](https://code.visualstudio.com/download)
+2. Extension Pack for Java, en Visual Studio Code
+3. [JDK 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) 
+
+**Ejecución**
+1. Abrir la carpeta del proyecto en Visual Studio.
+2. Dirigirse el archivo `Main.java`. Este se encuentra en src/main/ui
+3. Dar click en el botón de ejución localizado en la esquina superior derecha.
+4. Listo, podrá utilizar la aplicación en la ventana emergente.
+
+### Funcionalidades
+**Dashboard**
+- Balance total calculado a partir de los ingresos, gastos y contribuciones a las metas de ahorro. 
+- Total de los ingresos 
+- Total de los gastos
+- Avance de la última meta de ahorro creada
+
+**Expenses**
+- Listado de gastos, con su título, monto, fecha y notas
+- Creación de un gasto
+- Eliminación de un gasto
+
+**Incomes**
+- Listado de ingresos, con su origen y monto
+- Creación de un ingreso
+- Eliminación de un ingreso
+
+**Saving goals**
+- Listado de metas de ahorro, con su título, monto ahorrado, monto de la meta y estado
+- Creación de una meta de ahorro
+- Contribución a una meta de ahorro
+- Eliminación de una meta de ahorro
+
+**Manejo de archivos**
+- Creación de un nuevo archivo para las finanzas
+- Carga de un archivo existente
+- Guardado de las modificaciones
+
+## Aplicación modernizada
+🔜
+
+
 ## Manage money responsibly
 
 ### Abstract
