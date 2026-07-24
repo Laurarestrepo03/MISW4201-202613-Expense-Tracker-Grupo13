@@ -6,3 +6,8 @@ workspace.xml
 venv/
 __pycache__/
 .pytest_cache/
+
+#front
+2026-07-23-harness-front
+front_design
+.claude
