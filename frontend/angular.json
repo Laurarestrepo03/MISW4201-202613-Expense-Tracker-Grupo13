@@ -30,7 +30,14 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss"]
+            "styles": [
+              "@fontsource/geist-sans/400.css",
+              "@fontsource/geist-sans/500.css",
+              "@fontsource/geist-sans/600.css",
+              "@fontsource/geist-sans/700.css",
+              "material-symbols/outlined.css",
+              "src/styles.scss"
+            ]
           },
           "configurations": {
             "production": {

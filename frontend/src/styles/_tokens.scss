@@ -1,0 +1,47 @@
+// Design tokens — extracción normativa del mock "Modern Ledger"
+// (docs/ARQUITECTURA.md §3.1). ÚNICO lugar donde viven colores, radios,
+// sombras y medidas: los componentes solo consumen estas variables.
+:root {
+  // Color
+  --color-primary: #0037b0; // botones primarios, marca, tab activa, focus
+  --color-primary-hover: #1d4ed8; // hover de acciones primarias; card de Balance
+  --color-primary-tint: #cad3ff; // texto/label sobre fondos primarios
+  --color-selection: #dbeafe; // fila seleccionada en tablas
+  --color-bg: #f7f9ff; // fondo de página y filas zebra alternas
+  --color-surface: #ffffff; // cards, tablas, navbar, modales
+  --color-surface-alt: #f1f4fb; // hover sutil, banda de footer del modal Income
+  --color-border: #e5e8ef; // bordes de cards, divisores, thead
+  --color-border-input: #c4c5d7; // bordes de inputs y botones de paginación
+  --color-border-row: #eef1f8; // divisor entre filas de tabla
+  --color-text: #181c21;
+  --color-text-muted: #516070; // labels, subtítulos, thead
+  --color-text-secondary: #434655; // celdas secundarias (date, notes)
+  --color-disabled: #747686;
+  --color-success: #006a48; // montos de ingresos y transacciones positivas
+  --color-danger: #ba1a1a; // botón Remove, montos de gastos, banner de error
+
+  // Tipografía (Geist self-hosted vía @fontsource/geist-sans)
+  --font-family: 'Geist Sans', sans-serif;
+
+  // Radios
+  --radius-control: 8px; // botones, inputs, card de tabla
+  --radius-card: 12px; // stat cards y cards del dashboard
+  --radius-modal: 16px;
+  --radius-pagination: 6px;
+  --radius-full: 9999px; // chips circulares de íconos, botón close
+
+  // Sombras y overlay de modal
+  --shadow-card: 0 2px 4px rgba(29, 78, 216, 0.05);
+  --shadow-modal: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --overlay-modal: rgba(24, 28, 33, 0.5);
+  --overlay-blur: 2px;
+
+  // Layout
+  --layout-max-width: 1280px; // contenedor centrado
+  --layout-main-padding: 24px 32px 48px;
+  --layout-gap: 24px;
+  --navbar-height: 64px; // navbar sticky blanca con borde inferior
+  --table-row-height: 48px;
+  --table-checkbox-col: 48px;
+  --checkbox-size: 16px; // accent-color primario
+}

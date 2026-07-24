@@ -1,1 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+// Estilos globales mínimos. Los valores visuales viven en styles/_tokens.scss;
+// las fuentes (Geist + Material Symbols) se registran en angular.json (self-hosted).
+@use 'styles/tokens';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+}
+
+// Cifras monetarias SIEMPRE tabulares (ARQUITECTURA §3.1)
+.amount {
+  font-variant-numeric: tabular-nums;
+}
