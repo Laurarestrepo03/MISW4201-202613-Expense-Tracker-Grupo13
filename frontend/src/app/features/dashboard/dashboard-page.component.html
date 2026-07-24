@@ -1,0 +1,12 @@
+<h1 class="page-title page-title--hero">Welcome!</h1>
+
+@if (dashboard.loading()) {
+  <p class="page-status">Loading…</p>
+} @else {
+  <div class="stats-grid">
+    <app-stat-card label="Current Balance" [value]="dashboard.balance()" variant="primary" />
+    <app-stat-card label="Total Income" [value]="dashboard.totalIncome()" variant="success" />
+    <app-stat-card label="Total Expenses" [value]="dashboard.totalExpenses()" variant="danger" />
+  </div>
+  <app-transaction-list [transactions]="dashboard.transactions()" />
+}
