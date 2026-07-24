@@ -1,0 +1,9 @@
+// Card del dashboard (radius 12, §3.2): la comparten stat-card y
+// transaction-list. Definida UNA vez para proteger la métrica de 0 duplicación.
+.card {
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
