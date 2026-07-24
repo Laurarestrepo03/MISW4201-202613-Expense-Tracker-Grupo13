@@ -1,2 +1,8 @@
 *.class
 workspace.xml
+
+# backend
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
