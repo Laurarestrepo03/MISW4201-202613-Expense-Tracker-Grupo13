@@ -1,38 +1,17 @@
 import { Validators } from '@angular/forms';
 
 import { DialogField } from '../../shared/form-dialog/dialog-field';
-import { requiredTrimmed } from '../../shared/forms/required-trimmed';
+import { AMOUNT_FIELD, requiredTextField } from '../../shared/forms/common-fields';
 
 /**
  * Campos del modal "Add an Expense". Validadores = tabla de
  * docs/PARIDAD-Y-PRECONDICIONES.md §3 (PRE-01…PRE-04), ni más ni menos.
  */
 export const EXPENSE_FIELDS: DialogField[] = [
-  {
-    key: 'title',
-    label: 'Title',
-    type: 'text',
-    placeholder: 'e.g. Grocery Shopping',
-    // PRE-01: requerido, no vacío tras trim, máx 200
-    validators: [requiredTrimmed, Validators.maxLength(200)],
-    errorMessages: {
-      required: 'Title is required.',
-      maxlength: 'Title must be at most 200 characters.',
-    },
-  },
-  {
-    key: 'amount',
-    label: 'Amount ($)',
-    type: 'number',
-    placeholder: '0.00',
-    step: '0.01',
-    // PRE-02: numérico, > 0 (input numérico: imposible enviar texto)
-    validators: [Validators.required, Validators.min(0.01)],
-    errorMessages: {
-      required: 'Amount is required.',
-      min: 'Amount must be greater than 0.',
-    },
-  },
+  // PRE-01: requerido, no vacío tras trim, máx 200
+  requiredTextField('title', 'Title', 'e.g. Grocery Shopping'),
+  // PRE-02: numérico, > 0 (input numérico: imposible enviar texto)
+  AMOUNT_FIELD,
   {
     key: 'date',
     label: 'Date',
