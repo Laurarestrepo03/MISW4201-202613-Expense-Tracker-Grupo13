@@ -1,0 +1,6 @@
+{
+  "threshold": 0,
+  "pattern": "src/**/*.{ts,html,scss}",
+  "gitignore": true,
+  "reporters": ["console"]
+}
