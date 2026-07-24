@@ -1,4 +1,4 @@
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -17,7 +17,7 @@ import { EntityColumn, EntityRow } from './entity-column';
  */
 @Component({
   selector: 'app-entity-table',
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, DatePipe],
   templateUrl: './entity-table.component.html',
   styleUrl: './entity-table.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

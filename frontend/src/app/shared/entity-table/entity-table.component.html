@@ -45,6 +45,8 @@
                   <span class="amount" [class.is-success]="column.tone === 'success'">
                     {{ amount(row, column.key) | currency }}
                   </span>
+                } @else if (column.format === 'date') {
+                  {{ text(row, column.key) | date: 'mediumDate' }}
                 } @else {
                   {{ text(row, column.key) }}
                 }

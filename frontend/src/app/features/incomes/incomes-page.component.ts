@@ -15,10 +15,12 @@ const TEXTS: ListPageTexts = {
   emptyMessage: 'You have not registered any incomes yet.',
 };
 
-// Remove rojo con deshabilitado, como en Expenses: normalización documentada (§3.2)
+// Remove rojo con deshabilitado, como en Expenses: normalización documentada (§3.2).
+// Date (sellada por el servidor) visible por decisión del equipo 2026-07-24.
 const COLUMNS: EntityColumn[] = [
   { key: 'source', header: 'Source', icon: 'work' },
   { key: 'amount', header: 'Amount ($)', align: 'right', format: 'currency', tone: 'success' },
+  { key: 'date', header: 'Date', format: 'date', secondary: true },
 ];
 
 /** Ruta /incomes: solo configura la ListPage compartida (EntityTable + Add/Remove). */

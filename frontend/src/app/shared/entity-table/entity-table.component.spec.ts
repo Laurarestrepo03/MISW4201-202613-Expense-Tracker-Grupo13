@@ -48,6 +48,13 @@ describe('EntityTableComponent', () => {
     expect(html().querySelector('.amount')?.textContent?.trim()).toBe('$1,200.00');
   });
 
+  it('formats date cells with the shared medium date format', async () => {
+    fixture.componentRef.setInput('columns', [{ key: 'date', header: 'Date', format: 'date' }]);
+    fixture.componentRef.setInput('rows', [{ id: '1', date: '2026-07-24' }]);
+    await fixture.whenStable();
+    expect(bodyRows()[0].textContent).toContain('Jul 24, 2026');
+  });
+
   it('paginates client-side and shows "Showing X to Y of Z entries"', () => {
     expect(bodyRows().length).toBe(2);
     expect(range()).toBe('Showing 1 to 2 of 5 entries');

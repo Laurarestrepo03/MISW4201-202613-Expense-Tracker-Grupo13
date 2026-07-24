@@ -169,6 +169,13 @@ navbar apilada. Tablas con `overflow-x: auto` en su card.
 proteger la métrica de duplicación, se normaliza al patrón de Expenses (Remove rojo con estado
 deshabilitado) en ambas vistas. Registrado como desviación consciente del mock.
 
+**Desviación acordada (equipo, 2026-07-24)**: la tabla de Incomes muestra también la columna
+**Date** (la fecha ISO que el income-service sella al crear), formateada con el mismo formato
+de fecha del dashboard (`mediumDate`), igual que la columna Date de Expenses. El mock la
+omitía; el dato existe en `IncomeOut` y no requiere cambio de contrato. **Notes en Incomes
+queda pendiente del equipo de backend**: `IncomeCreate`/`IncomeOut` no tienen campo `note`,
+y el front no improvisa campos fuera del contrato.
+
 ## 4. Estructura de carpetas
 
 ### 4.1 Organización del repositorio (monorepo)

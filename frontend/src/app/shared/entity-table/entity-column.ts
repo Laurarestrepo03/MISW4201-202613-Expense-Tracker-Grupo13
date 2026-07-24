@@ -3,7 +3,7 @@ export interface EntityColumn {
   key: string;
   header: string;
   align?: 'left' | 'right';
-  format?: 'currency' | 'text';
+  format?: 'currency' | 'date' | 'text';
   /** Ícono Material Symbols en chip circular antes del valor (sources de Incomes). */
   icon?: string;
   /** Montos en verde (Incomes), según §3.2. */

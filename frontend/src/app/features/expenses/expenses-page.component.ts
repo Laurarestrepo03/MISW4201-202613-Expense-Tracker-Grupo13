@@ -18,7 +18,7 @@ const TEXTS: ListPageTexts = {
 const COLUMNS: EntityColumn[] = [
   { key: 'title', header: 'Title' },
   { key: 'amount', header: 'Amount ($)', align: 'right', format: 'currency' },
-  { key: 'date', header: 'Date', secondary: true },
+  { key: 'date', header: 'Date', format: 'date', secondary: true },
   { key: 'note', header: 'Notes', secondary: true },
 ];
 
