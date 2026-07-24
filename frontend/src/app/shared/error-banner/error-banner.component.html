@@ -1,0 +1,14 @@
+@if (banner.message(); as message) {
+  <div class="error-banner" role="alert">
+    <span class="material-symbols-outlined" aria-hidden="true">error</span>
+    <span class="error-banner__text">{{ message }}</span>
+    <button
+      type="button"
+      class="error-banner__close"
+      aria-label="Dismiss error"
+      (click)="banner.dismiss()"
+    >
+      <span class="material-symbols-outlined" aria-hidden="true">close</span>
+    </button>
+  </div>
+}

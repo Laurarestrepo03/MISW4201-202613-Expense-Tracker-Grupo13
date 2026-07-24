@@ -1,0 +1,79 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: var(--navbar-height);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--layout-gap);
+  max-width: var(--layout-max-width);
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 var(--space-8);
+}
+
+.navbar__brand {
+  color: var(--color-primary);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.navbar__links {
+  display: flex;
+  gap: var(--layout-gap);
+  margin: 0 0 0 auto;
+  padding: 0;
+  list-style: none;
+
+  a {
+    display: flex;
+    align-items: center;
+    height: var(--navbar-height);
+    border-bottom: 2px solid transparent;
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    font-weight: 400;
+    text-decoration: none;
+
+    &.is-active {
+      border-bottom-color: var(--color-primary);
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+  }
+}
+
+.main {
+  max-width: var(--layout-max-width);
+  margin: 0 auto;
+  padding: var(--layout-main-padding);
+}
+
+// ≤640px: navbar apilada (ARQUITECTURA §3.2, responsive)
+@media (max-width: 640px) {
+  .navbar {
+    height: auto;
+  }
+
+  .navbar__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+  }
+
+  .navbar__links {
+    margin-left: 0;
+
+    a {
+      height: auto;
+      padding: var(--space-1) 0;
+    }
+  }
+}

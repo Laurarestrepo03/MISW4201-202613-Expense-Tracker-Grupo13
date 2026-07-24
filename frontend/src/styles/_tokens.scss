@@ -41,7 +41,25 @@
   --layout-main-padding: 24px 32px 48px;
   --layout-gap: 24px;
   --navbar-height: 64px; // navbar sticky blanca con borde inferior
+  --banner-height: 40px; // franja roja de error sobre la navbar
   --table-row-height: 48px;
   --table-checkbox-col: 48px;
   --checkbox-size: 16px; // accent-color primario
+
+  // Escala de espaciado (derivada del mock: paddings 8/12/16/24/32)
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  // Escala tipográfica (tamaños que usa el mock)
+  --text-xs: 12px; // labels, thead, fechas
+  --text-sm: 14px; // subtítulos, celdas, links
+  --text-base: 16px; // inputs
+  --text-xl: 20px; // título de modal
+  --text-2xl: 24px; // marca de la navbar
+  --text-3xl: 32px; // h2 de listas, valor de stat card
+  --text-5xl: 48px; // h1 "Welcome!"
 }
