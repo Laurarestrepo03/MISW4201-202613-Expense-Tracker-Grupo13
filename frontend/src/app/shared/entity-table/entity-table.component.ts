@@ -81,12 +81,16 @@ export class EntityTableComponent {
   }
 
   protected amount(row: EntityRow, key: string): number {
-    return Number(row[key]);
+    return Number(this.cell(row, key));
   }
 
   protected text(row: EntityRow, key: string): string {
-    const value = row[key];
+    const value = this.cell(row, key);
     return value == null ? '' : String(value);
+  }
+
+  private cell(row: EntityRow, key: string): unknown {
+    return (row as unknown as Record<string, unknown>)[key];
   }
 
   protected goTo(offset: number): void {

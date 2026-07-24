@@ -12,5 +12,7 @@ export interface EntityColumn {
   secondary?: boolean;
 }
 
-/** Fila mínima que acepta la tabla: id + campos planos del recurso. */
-export type EntityRow = { id: string } & Record<string, unknown>;
+/** Fila mínima que acepta la tabla: cualquier recurso con id. */
+export interface EntityRow {
+  id: string;
+}

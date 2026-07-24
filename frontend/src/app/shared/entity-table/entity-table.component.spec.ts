@@ -8,7 +8,12 @@ const COLUMNS: EntityColumn[] = [
   { key: 'amount', header: 'Amount ($)', align: 'right', format: 'currency' },
 ];
 
-const ROWS: EntityRow[] = [
+interface TestRow extends EntityRow {
+  title: string;
+  amount: number;
+}
+
+const ROWS: TestRow[] = [
   { id: '1', title: 'Rent', amount: 1200 },
   { id: '2', title: 'Groceries', amount: 350.5 },
   { id: '3', title: 'Internet', amount: 60 },

@@ -1,0 +1,36 @@
+// Encabezado y estados de página (§3.2): compartidos por las 3 rutas.
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--layout-gap);
+  margin-bottom: var(--layout-gap);
+}
+
+.page-title {
+  margin: 0;
+  font-size: var(--text-3xl);
+  font-weight: 600;
+}
+
+.page-title--hero {
+  font-size: var(--text-5xl);
+  font-weight: 700;
+}
+
+.page-subtitle {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.page-actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.page-status {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}

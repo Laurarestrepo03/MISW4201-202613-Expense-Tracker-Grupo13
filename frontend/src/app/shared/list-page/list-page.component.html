@@ -1,0 +1,60 @@
+<header class="page-header">
+  <div>
+    <h2 class="page-title">{{ texts().heading }}</h2>
+    <p class="page-subtitle">{{ texts().subheading }}</p>
+  </div>
+  <div class="page-actions">
+    <button type="button" class="btn btn--primary" (click)="adding.set(true)">
+      <span class="material-symbols-outlined" aria-hidden="true">add</span>
+      {{ texts().addLabel }}
+    </button>
+    <button
+      type="button"
+      class="btn btn--danger"
+      [disabled]="selection().length === 0 || store().mutating()"
+      (click)="confirming.set(true)"
+    >
+      <span class="material-symbols-outlined" aria-hidden="true">delete</span>
+      Remove
+    </button>
+  </div>
+</header>
+
+@if (store().loading()) {
+  <p class="page-status">Loading…</p>
+} @else if (store().items().length === 0) {
+  <app-empty-state
+    [message]="texts().emptyMessage"
+    [actionLabel]="texts().addLabel"
+    (action)="adding.set(true)"
+  />
+} @else {
+  <app-entity-table
+    [columns]="columns()"
+    [rows]="store().items()"
+    [selectable]="true"
+    [pageSize]="5"
+    (selectionChange)="selection.set($event)"
+  />
+}
+
+@if (adding()) {
+  <app-form-dialog
+    [title]="texts().dialogTitle"
+    [submitLabel]="texts().submitLabel"
+    [fields]="fields()"
+    [pending]="store().mutating()"
+    [fieldErrors]="store().fieldErrors()"
+    (closed)="adding.set(false)"
+    (submitted)="submit($event)"
+  />
+}
+
+@if (confirming()) {
+  <app-confirm-dialog
+    [lines]="confirmLines()"
+    [pending]="store().mutating()"
+    (cancelled)="confirming.set(false)"
+    (confirmed)="remove()"
+  />
+}
