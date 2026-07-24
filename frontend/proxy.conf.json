@@ -1,0 +1,12 @@
+{
+  "/incomes": {
+    "target": "http://localhost:8001",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/expenses": {
+    "target": "http://localhost:8002",
+    "secure": false,
+    "changeOrigin": true
+  }
+}
