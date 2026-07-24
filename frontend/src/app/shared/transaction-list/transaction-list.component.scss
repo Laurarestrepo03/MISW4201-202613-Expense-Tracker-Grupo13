@@ -1,0 +1,45 @@
+.transactions-card__title {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-base);
+  font-weight: 600;
+}
+
+.transactions {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.transaction {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.transaction__info {
+  flex: 1;
+}
+
+.transaction__title {
+  margin: 0;
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.transaction__date {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+.transaction__amount {
+  color: var(--color-danger);
+  font-size: var(--text-sm);
+  font-weight: 600;
+
+  &.is-income {
+    color: var(--color-success);
+  }
+}

@@ -1,0 +1,26 @@
+<section class="card transactions-card">
+  <h3 class="transactions-card__title">Recent Transactions</h3>
+  <ul class="transactions">
+    @for (transaction of transactions(); track transaction.id) {
+      <li class="transaction">
+        <span
+          class="icon-chip"
+          [class.icon-chip--success]="transaction.kind === 'income'"
+          [class.icon-chip--danger]="transaction.kind === 'expense'"
+          aria-hidden="true"
+        >
+          <span class="material-symbols-outlined">
+            {{ transaction.kind === 'income' ? 'add' : 'remove' }}
+          </span>
+        </span>
+        <div class="transaction__info">
+          <p class="transaction__title">{{ transaction.title }}</p>
+          <p class="transaction__date">{{ transaction.date | date: 'mediumDate' }}</p>
+        </div>
+        <span class="transaction__amount amount" [class.is-income]="transaction.kind === 'income'">
+          {{ transaction.kind === 'income' ? '+' : '-' }}{{ transaction.amount | currency }}
+        </span>
+      </li>
+    }
+  </ul>
+</section>
