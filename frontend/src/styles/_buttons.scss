@@ -1,0 +1,46 @@
+// Botones del mock (§3.2): primario, peligro y texto. Definidos UNA vez;
+// los consumen FormDialog, ConfirmDialog, empty-state y las páginas de lista.
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border: none;
+  border-radius: var(--radius-control);
+  font-family: inherit;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .material-symbols-outlined {
+    font-size: var(--chip-icon-size);
+  }
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: var(--color-surface);
+
+  &:hover:not(:disabled) {
+    background: var(--color-primary-hover);
+  }
+}
+
+.btn--danger {
+  background: var(--color-danger);
+  color: var(--color-surface);
+}
+
+.btn--text {
+  background: transparent;
+  color: var(--color-text-muted);
+
+  &:hover:not(:disabled) {
+    color: var(--color-text);
+  }
+}

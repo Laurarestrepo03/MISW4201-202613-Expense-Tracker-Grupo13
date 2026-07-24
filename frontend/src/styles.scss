@@ -1,6 +1,8 @@
 // Estilos globales mínimos. Los valores visuales viven en styles/_tokens.scss;
 // las fuentes (Geist + Material Symbols) se registran en angular.json (self-hosted).
 @use 'styles/tokens';
+@use 'styles/buttons';
+@use 'styles/dialog';
 
 *,
 *::before,

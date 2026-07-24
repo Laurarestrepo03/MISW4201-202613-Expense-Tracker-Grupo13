@@ -1,0 +1,46 @@
+<div class="dialog-overlay">
+  <div class="dialog" role="dialog" aria-modal="true" [attr.aria-label]="title()">
+    <header class="dialog__header">
+      <h2>{{ title() }}</h2>
+      <button type="button" class="dialog__close" aria-label="Close" (click)="closed.emit()">
+        <span class="material-symbols-outlined" aria-hidden="true">close</span>
+      </button>
+    </header>
+    <form [formGroup]="form()" (ngSubmit)="submit()">
+      <div class="dialog__body">
+        @for (field of fields(); track field.key) {
+          <div class="form-field">
+            <label class="form-field__label" [for]="field.key">{{ field.label }}</label>
+            @if (field.type === 'textarea') {
+              <textarea
+                class="form-field__input"
+                rows="3"
+                [id]="field.key"
+                [formControlName]="field.key"
+                [placeholder]="field.placeholder ?? ''"
+              ></textarea>
+            } @else {
+              <input
+                class="form-field__input"
+                [id]="field.key"
+                [type]="field.type"
+                [formControlName]="field.key"
+                [placeholder]="field.placeholder ?? ''"
+                [attr.step]="field.step ?? null"
+              />
+            }
+            @if (errorFor(field); as message) {
+              <p class="form-field__error">{{ message }}</p>
+            }
+          </div>
+        }
+      </div>
+      <footer class="dialog__footer">
+        <button type="button" class="btn btn--text" (click)="closed.emit()">Cancel</button>
+        <button type="submit" class="btn btn--primary" [disabled]="pending()">
+          {{ submitLabel() }}
+        </button>
+      </footer>
+    </form>
+  </div>
+</div>
