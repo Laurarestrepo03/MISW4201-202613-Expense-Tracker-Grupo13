@@ -1,0 +1,20 @@
+<div class="dialog-overlay">
+  <div class="dialog" role="alertdialog" aria-modal="true" aria-label="Confirm removal">
+    <div class="dialog__body">
+      @for (line of lines(); track $index) {
+        <p class="confirm-line">{{ line }}</p>
+      }
+    </div>
+    <footer class="dialog__footer">
+      <button type="button" class="btn btn--text" (click)="cancelled.emit()">Cancel</button>
+      <button
+        type="button"
+        class="btn btn--danger"
+        [disabled]="pending()"
+        (click)="confirmed.emit()"
+      >
+        Remove
+      </button>
+    </footer>
+  </div>
+</div>
