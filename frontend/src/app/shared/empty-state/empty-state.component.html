@@ -1,0 +1,7 @@
+<div class="empty-state">
+  <p class="empty-state__message">{{ message() }}</p>
+  <button type="button" class="btn btn--primary" (click)="action.emit()">
+    <span class="material-symbols-outlined" aria-hidden="true">add</span>
+    {{ actionLabel() }}
+  </button>
+</div>
