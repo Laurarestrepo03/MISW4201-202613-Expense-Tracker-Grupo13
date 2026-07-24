@@ -53,55 +53,56 @@ trabajo nuevo. A continuación el paso a paso para ejecutarla, y el listado de f
 
 ## Aplicación modernizada
 
-Migración total hacia una SPA Angular + dos microservicios FastAPI serverless
-(cada uno con su Lambda y su tabla DynamoDB). **Alcance (decisión unánime del
-equipo, 2026-07-24): Dashboard (solo lectura) + CRUD de Expenses + CRUD de
-Incomes; Saving Goals quedó descartado deliberadamente.**
+La aplicación de escritorio monolítica (Java Swing, un solo proceso, datos en
+`data.json`) se migró a una arquitectura web distribuida:
 
-### Mapa del monorepo
+- **Frontend**: SPA en Angular (componentes standalone, signals, Router y SCSS
+  con design tokens). Tres vistas: Dashboard de solo lectura, CRUD de Expenses
+  y CRUD de Incomes.
+- **Backend**: dos microservicios FastAPI **independientes** —`income-service`
+  y `expense-service`—, cada uno con su propia Lambda y su propia tabla
+  DynamoDB. No comparten tabla ni código.
+- **Alcance**: Saving Goals no se migró; el equipo lo descartó por decisión
+  unánime para concentrar la migración en los dos requisitos de negocio.
+- **Balance**: como los microservicios son independientes, no existe un
+  endpoint de balance. El Dashboard lo compone en el cliente restando el total
+  de gastos al total de ingresos, y arma "Recent Transactions" mezclando ambas
+  listas.
 
 ```
 MISW4201-202613-Expense-Tracker-Grupo13/
-├── legacy/                    # app Java Swing original, CONGELADA (referencia de paridad)
+├── legacy/        # app Java Swing original, congelada como referencia de paridad
 ├── backend/
-│   ├── income-service/        # FastAPI + Mangum + income-table   (dev :8001)
-│   └── expense-service/       # FastAPI + Mangum + expense-table  (dev :8002)
-├── frontend/                  # SPA Angular 21 (standalone, signals, SCSS)
-│   ├── CLAUDE.md              # reglas imperativas del trabajo de front
-│   ├── docs/                  # ARQUITECTURA.md · PARIDAD-Y-PRECONDICIONES.md
-│   ├── proxy.conf.json        # dev: /incomes → :8001, /expenses → :8002 (mitiga CORS)
-│   └── src/app/
-│       ├── core/              # modelos del contrato, api (CrudApiService), interceptores, ListStore
-│       ├── shared/            # EntityTable, FormDialog, ConfirmDialog, ListPage, stat-card, …
-│       └── features/          # dashboard / expenses / incomes (rutas lazy)
-├── front_design/              # Modern Ledger.html — definición visual (no es implementación)
-└── 2026-07-23-harness-front/  # fuente del harness (archivo histórico)
+│   ├── income-service/    # FastAPI + income-table    (local :8001)
+│   └── expense-service/   # FastAPI + expense-table   (local :8002)
+├── frontend/      # SPA Angular  (local :4200)
+│   ├── docs/      # arquitectura, paridad funcional y precondiciones
+│   └── src/app/   # core (contrato y estado) · shared (componentes) · features (3 rutas)
+└── front_design/  # definición visual del rediseño
 ```
 
-No existe endpoint de dashboard: el front compone `balance = total de
-/incomes/total − total de /expenses/total` y deriva "Recent Transactions"
-mezclando ambas listas (única lógica de negocio permitida en el front,
-documentada en `frontend/docs/ARQUITECTURA.md` §1).
+### Ejecutar localmente
 
-### Correr el backend localmente
+Requisitos: Node 22, Python 3.13 y credenciales de AWS con las tablas
+`income-table` y `expense-table` en `us-east-1`.
 
-Cada microservicio es independiente (ver `backend/README.md` para tests y esquema):
+**income-service**
 
 ```bash
 cd backend/income-service
-pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8001
+pip install -r requirements.txt uvicorn
+uvicorn app.main:app --port 8001
 ```
+
+**expense-service**
 
 ```bash
 cd backend/expense-service
-pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8002
+pip install -r requirements.txt uvicorn
+uvicorn app.main:app --port 8002
 ```
 
-### Correr el frontend localmente
-
-Requiere Node 22.12+.
+**frontend**
 
 ```bash
 cd frontend
@@ -109,17 +110,8 @@ npm ci
 npm start
 ```
 
-`npm start` levanta la SPA en `http://localhost:4200` con el proxy de dev
-(`proxy.conf.json`) apuntando a los dos microservicios locales — así se evita
-CORS solo en desarrollo (en prod lo resuelve `CORSMiddleware`, ADR §11.1).
-
-Otros comandos del frontend:
-
-| Comando | Qué hace |
-|---|---|
-| `npm run lint` | ESLint con gates de Code Health + jscpd (0 duplicación) |
-| `npm test` | unit tests headless en una pasada (incluye PRE-01…PRE-06) |
-| `npm run build` | build de producción (S3 + CloudFront, assets con hash) |
+La aplicación queda en `http://localhost:4200`. En desarrollo el servidor de
+Angular enruta `/incomes` y `/expenses` hacia los dos microservicios locales.
 
 <!--
 ## Manage money responsibly
