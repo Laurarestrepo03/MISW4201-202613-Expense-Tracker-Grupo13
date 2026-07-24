@@ -51,7 +51,9 @@
   }
 }
 
-.is-right {
+// Con .entity-table delante para ganarle a la regla general de th
+// (si no, el encabezado de montos queda a la izquierda, lejos de sus valores)
+.entity-table .is-right {
   text-align: right;
 }
 
