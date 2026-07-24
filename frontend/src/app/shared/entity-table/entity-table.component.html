@@ -1,0 +1,74 @@
+<div class="table-card">
+  <div class="table-card__scroll">
+    <table class="entity-table">
+      <thead>
+        <tr>
+          @if (selectable()) {
+            <th class="entity-table__check">
+              <input
+                type="checkbox"
+                aria-label="Select all"
+                [checked]="allSelected()"
+                (change)="toggleAll()"
+              />
+            </th>
+          }
+          @for (column of columns(); track column.key) {
+            <th [class.is-right]="column.align === 'right'">{{ column.header }}</th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of pagedRows(); track row.id) {
+          <tr [class.is-selected]="isSelected(row.id)">
+            @if (selectable()) {
+              <td class="entity-table__check">
+                <input
+                  type="checkbox"
+                  aria-label="Select row"
+                  [checked]="isSelected(row.id)"
+                  (change)="toggleRow(row.id)"
+                />
+              </td>
+            }
+            @for (column of columns(); track column.key) {
+              <td
+                [class.is-right]="column.align === 'right'"
+                [class.is-secondary]="column.secondary"
+              >
+                @if (column.icon) {
+                  <span class="icon-chip" aria-hidden="true">
+                    <span class="material-symbols-outlined">{{ column.icon }}</span>
+                  </span>
+                }
+                @if (column.format === 'currency') {
+                  <span class="amount" [class.is-success]="column.tone === 'success'">
+                    {{ amount(row, column.key) | currency }}
+                  </span>
+                } @else {
+                  {{ text(row, column.key) }}
+                }
+              </td>
+            }
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <footer class="entity-table__footer">
+    <span class="entity-table__range">{{ rangeLabel() }}</span>
+    <div class="entity-table__pager">
+      <button type="button" class="pager-btn" [disabled]="page() === 0" (click)="goTo(-1)">
+        Prev
+      </button>
+      <button
+        type="button"
+        class="pager-btn"
+        [disabled]="page() >= pageCount() - 1"
+        (click)="goTo(1)"
+      >
+        Next
+      </button>
+    </div>
+  </footer>
+</div>

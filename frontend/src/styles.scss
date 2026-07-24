@@ -25,3 +25,28 @@ body {
 .amount {
   font-variant-numeric: tabular-nums;
 }
+
+// Chip circular de ícono sobre fondo tenue (tablas de Incomes y Recent Transactions)
+.icon-chip {
+  display: inline-grid;
+  place-items: center;
+  width: var(--chip-size);
+  height: var(--chip-size);
+  margin-right: var(--space-2);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-alt);
+  color: var(--color-text-muted);
+  vertical-align: middle;
+
+  .material-symbols-outlined {
+    font-size: var(--chip-icon-size);
+  }
+
+  &.icon-chip--success {
+    color: var(--color-success);
+  }
+
+  &.icon-chip--danger {
+    color: var(--color-danger);
+  }
+}
