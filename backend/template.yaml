@@ -1,0 +1,173 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Expense Tracker Backend - Microservicios de Gastos e Ingresos
+
+Globals:
+  Function:
+    Timeout: 30
+    Runtime: python3.11
+    MemorySize: 512
+    Environment:
+      Variables:
+        ALLOWED_ORIGINS: "http://localhost:4200"
+
+
+Resources:
+  # ==================== DynamoDB Tables ====================
+  
+  ExpenseTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub 'expense-table'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: PK
+          AttributeType: S
+        - AttributeName: SK
+          AttributeType: S
+      KeySchema:
+        - AttributeName: PK
+          KeyType: HASH
+        - AttributeName: SK
+          KeyType: RANGE
+
+  IncomeTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub 'income-table'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: PK
+          AttributeType: S
+        - AttributeName: SK
+          AttributeType: S
+      KeySchema:
+        - AttributeName: PK
+          KeyType: HASH
+        - AttributeName: SK
+          KeyType: RANGE
+
+  # ==================== Lambda Functions ====================
+
+  ExpenseServiceFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub 'expense-service'
+      CodeUri: expense-service/
+      Handler: app.main.handler
+      Description: Microservicio de gestión de gastos
+      Role: !Sub 'arn:aws:iam::${AWS::AccountId}:role/LabRole'
+      Environment:
+        Variables:
+          EXPENSE_TABLE: !Ref ExpenseTable
+      Events:
+        # Crear gasto
+        CreateExpense:
+          Type: Api
+          Properties:
+            Path: /expenses
+            Method: POST
+            RestApiId: !Ref ExpenseTrackerApi
+        # Listar gastos
+        ListExpenses:
+          Type: Api
+          Properties:
+            Path: /expenses
+            Method: GET
+            RestApiId: !Ref ExpenseTrackerApi
+        # Obtener total de gastos
+        GetTotalExpenses:
+          Type: Api
+          Properties:
+            Path: /expenses/total
+            Method: GET
+            RestApiId: !Ref ExpenseTrackerApi
+        # Obtener un gasto específico
+        GetExpense:
+          Type: Api
+          Properties:
+            Path: /expenses/{expense_id}
+            Method: GET
+            RestApiId: !Ref ExpenseTrackerApi
+        # Eliminar gasto
+        DeleteExpense:
+          Type: Api
+          Properties:
+            Path: /expenses/{expense_id}
+            Method: DELETE
+            RestApiId: !Ref ExpenseTrackerApi
+      Tags:
+        Service: expense-service
+
+  IncomeServiceFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub 'income-service'
+      CodeUri: income-service/
+      Handler: app.main.handler
+      Description: Microservicio de gestión de ingresos
+      Role: !Sub 'arn:aws:iam::${AWS::AccountId}:role/LabRole'
+      Environment:
+        Variables:
+          INCOME_TABLE: !Ref IncomeTable
+      Events:
+        # Crear ingreso
+        CreateIncome:
+          Type: Api
+          Properties:
+            Path: /incomes
+            Method: POST
+            RestApiId: !Ref ExpenseTrackerApi
+        # Listar ingresos
+        ListIncomes:
+          Type: Api
+          Properties:
+            Path: /incomes
+            Method: GET
+            RestApiId: !Ref ExpenseTrackerApi
+        # Obtener total de ingresos
+        GetTotalIncomes:
+          Type: Api
+          Properties:
+            Path: /incomes/total
+            Method: GET
+            RestApiId: !Ref ExpenseTrackerApi
+        # Obtener un ingreso específico
+        GetIncome:
+          Type: Api
+          Properties:
+            Path: /incomes/{income_id}
+            Method: GET
+            RestApiId: !Ref ExpenseTrackerApi
+        # Eliminar ingreso
+        DeleteIncome:
+          Type: Api
+          Properties:
+            Path: /incomes/{income_id}
+            Method: DELETE
+            RestApiId: !Ref ExpenseTrackerApi
+      Tags:
+        Service: income-service
+
+  # ==================== API Gateway ====================
+
+  ExpenseTrackerApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: !Sub 'expense-tracker-api'
+      StageName: qa
+      Cors:
+        AllowMethods: "'GET,POST,DELETE,OPTIONS'"
+        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+        AllowOrigin: "'http://localhost:4200'"
+        MaxAge: "'600'"
+
+# ==================== Outputs ====================
+
+Outputs:
+  ApiUrl:
+    Description: URL del API Gateway
+    Value: !Sub 'https://${ExpenseTrackerApi}.execute-api.${AWS::Region}.amazonaws.com/qa/'
+    Export:
+      Name: !Sub '${AWS::StackName}-ApiUrl'

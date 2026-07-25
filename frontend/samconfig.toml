@@ -1,0 +1,31 @@
+version = 0.1
+
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "expense-tracker-frontend"
+s3_prefix = "expense-tracker-frontend"
+region = "us-east-1"
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "Environment=dev"
+confirm_changeset = true
+
+[dev]
+[dev.deploy]
+[dev.deploy.parameters]
+stack_name = "expense-tracker-frontend-dev"
+s3_prefix = "expense-tracker-frontend-dev"
+region = "us-east-1"
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "Environment=dev"
+confirm_changeset = false
+
+[prod]
+[prod.deploy]
+[prod.deploy.parameters]
+stack_name = "expense-tracker-frontend-prod"
+s3_prefix = "expense-tracker-frontend-prod"
+region = "us-east-1"
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "Environment=prod"
+confirm_changeset = true

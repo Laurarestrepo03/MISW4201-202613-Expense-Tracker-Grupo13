@@ -57,3 +57,33 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## AWS Deployment
+
+This project is configured for deployment to AWS CloudFront using AWS SAM (Serverless Application Model).
+
+### Quick Start
+
+**Prerequisites**: AWS CLI and SAM CLI installed and configured
+
+### Available Environments
+
+- **dev**: Development environment
+- **prod**: Production environment
+
+### Build Commands
+
+```bash
+npm run build         # Production build
+npm run build:dev     # Development build
+```
+
+### Infrastructure
+
+The deployment creates:
+- S3 bucket for static files
+- CloudFront distribution for global CDN
+- Origin Access Control for secure access
+- CloudFront Function for SPA routing
+
+See [template.yaml](template.yaml) for complete infrastructure definition.
