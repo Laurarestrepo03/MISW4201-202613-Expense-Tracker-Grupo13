@@ -1,0 +1,15 @@
+node_modules
+dist
+.angular
+.git
+.gitignore
+*.md
+.vscode
+coverage
+.aws-sam
+template.yaml
+samconfig.toml
+Dockerfile
+dockerfile
+.dockerignore
+npm-debug.log

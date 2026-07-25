@@ -10,7 +10,7 @@ Globals:
     MemorySize: 512
     Environment:
       Variables:
-        ALLOWED_ORIGINS: "http://localhost:4200"
+        ALLOWED_ORIGINS: "http://localhost:4200,http://54.209.54.122"
 
 
 Resources:
@@ -62,40 +62,18 @@ Resources:
         Variables:
           EXPENSE_TABLE: !Ref ExpenseTable
       Events:
-        # Crear gasto
-        CreateExpense:
+        # Enruta /expenses y todos sus subpaths
+        ExpenseRoot:
           Type: Api
           Properties:
             Path: /expenses
-            Method: POST
+            Method: ANY
             RestApiId: !Ref ExpenseTrackerApi
-        # Listar gastos
-        ListExpenses:
+        ExpenseProxy:
           Type: Api
           Properties:
-            Path: /expenses
-            Method: GET
-            RestApiId: !Ref ExpenseTrackerApi
-        # Obtener total de gastos
-        GetTotalExpenses:
-          Type: Api
-          Properties:
-            Path: /expenses/total
-            Method: GET
-            RestApiId: !Ref ExpenseTrackerApi
-        # Obtener un gasto específico
-        GetExpense:
-          Type: Api
-          Properties:
-            Path: /expenses/{expense_id}
-            Method: GET
-            RestApiId: !Ref ExpenseTrackerApi
-        # Eliminar gasto
-        DeleteExpense:
-          Type: Api
-          Properties:
-            Path: /expenses/{expense_id}
-            Method: DELETE
+            Path: /expenses/{proxy+}
+            Method: ANY
             RestApiId: !Ref ExpenseTrackerApi
       Tags:
         Service: expense-service
@@ -112,40 +90,18 @@ Resources:
         Variables:
           INCOME_TABLE: !Ref IncomeTable
       Events:
-        # Crear ingreso
-        CreateIncome:
+        # Enruta /incomes y todos sus subpaths 
+        IncomeRoot:
           Type: Api
           Properties:
             Path: /incomes
-            Method: POST
+            Method: ANY
             RestApiId: !Ref ExpenseTrackerApi
-        # Listar ingresos
-        ListIncomes:
+        IncomeProxy:
           Type: Api
           Properties:
-            Path: /incomes
-            Method: GET
-            RestApiId: !Ref ExpenseTrackerApi
-        # Obtener total de ingresos
-        GetTotalIncomes:
-          Type: Api
-          Properties:
-            Path: /incomes/total
-            Method: GET
-            RestApiId: !Ref ExpenseTrackerApi
-        # Obtener un ingreso específico
-        GetIncome:
-          Type: Api
-          Properties:
-            Path: /incomes/{income_id}
-            Method: GET
-            RestApiId: !Ref ExpenseTrackerApi
-        # Eliminar ingreso
-        DeleteIncome:
-          Type: Api
-          Properties:
-            Path: /incomes/{income_id}
-            Method: DELETE
+            Path: /incomes/{proxy+}
+            Method: ANY
             RestApiId: !Ref ExpenseTrackerApi
       Tags:
         Service: income-service
@@ -157,11 +113,6 @@ Resources:
     Properties:
       Name: !Sub 'expense-tracker-api'
       StageName: qa
-      Cors:
-        AllowMethods: "'GET,POST,DELETE,OPTIONS'"
-        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
-        AllowOrigin: "'http://localhost:4200'"
-        MaxAge: "'600'"
 
 # ==================== Outputs ====================
 
